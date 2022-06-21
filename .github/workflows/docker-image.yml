@@ -47,6 +47,7 @@ jobs:
           echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem && chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem $USER_NAME@$HOSTNAME 
           
+             cd
              pwd
              ls
              /deploy.sh $GITHUB_SHA
