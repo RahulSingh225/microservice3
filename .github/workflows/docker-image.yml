@@ -27,7 +27,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $IMAGE:$GITHUB_SHA
     - name: Push the Docker Image
-      #run: docker push $IMAGE:$GITHUB_SHA
+      run: docker push $IMAGE:$GITHUB_SHA
       
   deploy: 
     needs: build
