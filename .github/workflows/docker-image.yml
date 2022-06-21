@@ -27,7 +27,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $IMAGE:$GITHUB_SHA
     - name: Push the Docker Image
-      run: docker push $IMAGE:$GITHUB_SHA
+      #run: docker push $IMAGE:$GITHUB_SHA
       
   deploy: 
     needs: build
@@ -44,8 +44,8 @@ jobs:
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-          
-          ssh -o StrictHostKeyChecking=no -i $PRIVATE_KEY $USER_NAME@$HOSTNAME 
+          echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem $USER_NAME@$HOSTNAME 
           
              ./deploy.sh $GITHUB_SHA
             #Now we have got the access of EC2 and we will start the deploy .
