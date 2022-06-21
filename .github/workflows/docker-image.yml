@@ -47,7 +47,9 @@ jobs:
           echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem && chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem $USER_NAME@$HOSTNAME 
           
-             ./deploy.sh $GITHUB_SHA
+             pwd
+             ls
+             /deploy.sh $GITHUB_SHA
             #Now we have got the access of EC2 and we will start the deploy .
             #cd /home/ubuntu/CounterApp &&
             #git checkout master &&
