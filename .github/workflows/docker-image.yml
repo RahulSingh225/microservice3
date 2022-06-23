@@ -50,7 +50,7 @@ jobs:
            ls
            cd microservice3
            deploy.sh $GITHUB_SHA
-          exit 
+           exit 
             
              
             
