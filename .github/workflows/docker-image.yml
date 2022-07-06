@@ -51,7 +51,7 @@ jobs:
            ls
            sudo mkdir runner
            cd runner 
-           touch motherf.txt
+           sudo touch motherf.txt
            exit 
    
            
