@@ -48,8 +48,16 @@ jobs:
         run: |
           echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem && chmod 400 key.pem
           ssh -i key.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME <<'ENDSSH'
-          echo "${{ env.PRIVATE_KEY2 }}" | tr -d '\r' > key.pem && chmod 400 key.pem
-          sudo ssh -i key.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME <<'ENDSSH'
+      
+      - name: ENTER PRIVATE in EC2
+        env:
+            PRIVATE_KEY2: ${{secrets.INNER_PEM_KEY}}
+            HOSTNAME2 : ${{ secrets.INNER_HOSTNAME }}
+            USER_NAME : ${{ secrets.USER_NAME  }}
+            
+        run: |
+          echo "${{ env.PRIVATE_KEY2 }}" | tr -d '\r' > key1.pem && chmod 400 key.pem
+          ssh -i key1.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME2 <<'ENDSSH'
            pwd
            ls
            sudo mkdir runner
