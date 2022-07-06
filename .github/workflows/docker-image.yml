@@ -47,7 +47,7 @@ jobs:
           echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem && chmod 400 key.pem
           ssh -i key.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME <<'ENDSSH'
            
-      - name: ENTER PUBLIC in EC2
+      - name: ENTER private in EC2
         env:
             PRIVATE_KEY: ${{ secrets.INNER_PEM_KEY  }}
             HOSTNAME : ${{ secrets.HOSTNAME  }}
@@ -55,7 +55,7 @@ jobs:
        
         run: |
           echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem && chmod 400 key.pem
-          ssh -i key.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME <<'ENDSSH' 
+          sudo ssh -i key.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME <<'ENDSSH' 
            pwd
            ls
            sudo mkdir runner
